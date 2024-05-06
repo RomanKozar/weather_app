@@ -62,11 +62,12 @@ const Dashboard = () => {
             <Moment format="LLL" data={{ dateToFormat }} />
           </Typography>
         </Stack>
-        <SearchBar location={location}/>
+        <SearchBar location={location} />
       </Stack>
-      {/* <TodaysOverview current={{current}} forecast={{forecast}}/> */}
-      {/* <ThreeDayForecast forecast={{ forecast }} /> */}
-      {/* <WeatherChart forecast={{ forecast }} /> */}
+      <Divider />
+      <TodaysOverview current={current} forecast={forecast} />
+      <ThreeDayForecast forecast={forecast} />
+      <WeatherChart forecast={forecast} />
     </Box>
   );
 };
