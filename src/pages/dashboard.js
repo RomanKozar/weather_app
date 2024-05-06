@@ -36,7 +36,6 @@ const Dashboard = () => {
 
     dispatch(setLocation(currentLocation));
 
-    console.log(currentLocation);
   }, [
     dispatch,
     getGeoLocation?.coordinates.lat,
@@ -45,7 +44,7 @@ const Dashboard = () => {
     locationState,
   ]);
 
-  if (isFetching || !isLoadingLocation) return <div>Loading</div>;
+  if (isFetching || !isLoadingLocation) return <Loader />;
 
   return (
     <Box p={4}>

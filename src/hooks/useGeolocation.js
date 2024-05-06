@@ -9,8 +9,16 @@ const useGeoLocation = () => {
   const successMsg = (location) => {
     setGeoLocation({
       loaded: true,
+      // coordinates: {
+      //   lat: 48.6324, //Оленьово
+      //   lng: 22.579,
+      // },
+      // coordinates: {
+      //   lat: 48.6208, //Ужгород
+      //   lng: 22.2879,
+      // },
       coordinates: {
-        lat: location.coords.latitude,
+        lat: location.coords.latitude, //За геолокацією
         lng: location.coords.longitude,
       },
     });

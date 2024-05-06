@@ -5,7 +5,7 @@ import { MemoryRouter, Link, matchPath, useLocation } from "react-router-dom";
 import { StaticRouter } from "react-router-dom/server";
 import { Dashboard, Map, Star } from "@mui/icons-material";
 import { LeftNavContainer } from "../theme/styled";
-import logo from "../assets/images/02d.png";
+import logo from "../assets/images/pngegg.png";
 
 function Router(props) {
   const { children } = props;
@@ -65,8 +65,8 @@ const LeftNav = () => {
         <Tab
           icon={<Star />}
           label="Saves"
-          value="/Saves"
-          to="/Saves"
+          value="/saves"
+          to="/saves"
           component={Link}
         />
       </Tabs>
