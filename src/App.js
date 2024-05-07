@@ -22,10 +22,12 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/map" element={<Map />} />
+              <Route path="/saves" element={<Saves />} />
             </Routes>
           </MiddleContainer>
           <WeatherDisplay />
         </DashboardContainer>
+        <Footer />
       </ThemeProvider>
     </div>
   );

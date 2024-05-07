@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const baseUrl = `https://weatherapi-com.p.rapidapi.com/`;
 
 const weatherHeaders = {
-  "X-RapidAPI-Key": "aaea3c74efmshcfa3494b6433b50p153adcjsnee729377941c",
+  "X-RapidAPI-Key": process.env.REACT_APP_WEATCHER_API_KEY,
   "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
 };
 
