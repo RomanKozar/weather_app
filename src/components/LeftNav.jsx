@@ -45,6 +45,7 @@ const LeftNav = () => {
   return (
     <LeftNavContainer>
       <div className="nav-img">
+        {" "}
         <img src={logo} alt="logo" />
       </div>
       <Tabs value={currentTab} orientation="vertical" indicatorColor="">

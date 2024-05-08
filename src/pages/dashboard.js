@@ -4,7 +4,7 @@ import { setLocation } from "../services/weatherSlice";
 import { Box, Typography, Stack, Divider } from "@mui/material";
 import { useGetForecastWeatherQuery } from "../services/weatherApi";
 import Moment from "react-moment";
-import useGeoLocation from "../hooks/useGeolocation";
+import useGeoLocation from "../hooks/useGeoLocation";
 import WeatherChart from "../components/Chart";
 import TodaysOverview from "../components/TodaysOverview";
 import SearchBar from "../components/Searchbar";
@@ -25,7 +25,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     let currentLocation = "";
-
     if (locationState) {
       currentLocation = locationState;
     } else if (getGeoLocation?.loaded)
@@ -35,7 +34,6 @@ const Dashboard = () => {
       ];
 
     dispatch(setLocation(currentLocation));
-
   }, [
     dispatch,
     getGeoLocation?.coordinates.lat,
@@ -55,15 +53,15 @@ const Dashboard = () => {
       >
         <Stack>
           <Typography variant="h5"> {location?.name} </Typography>
-          <Typography variant="subtitle2"> {location?.region}</Typography>
+          <Typography variant="subtitle2"> {location?.region} </Typography>
           <Typography variant="subtitle2">
             {" "}
-            <Moment format="LLL" data={{ dateToFormat }} />
+            <Moment format="LL" date={dateToFormat} />{" "}
           </Typography>
         </Stack>
         <SearchBar location={location} />
       </Stack>
-      <Divider />
+      <Divider light />
       <TodaysOverview current={current} forecast={forecast} />
       <ThreeDayForecast forecast={forecast} />
       <WeatherChart forecast={forecast} />

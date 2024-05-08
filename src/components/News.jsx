@@ -21,6 +21,7 @@ const News = ({ news }) => {
     }
     return text.substr(0, length) + "...";
   };
+
   return (
     <Box p={4}>
       <Typography sx={{ marginBottom: 1 }} variant="h5">
@@ -51,29 +52,30 @@ const News = ({ news }) => {
           },
         }}
       >
-        {news?.value?.map((news, i) => {
-          const dateToFormat = news?.datePublished;
-
+        {news?.map((newsItem, i) => {
+          const dateToFormat = newsItem?.publishedAt;
           return (
-            <SwiperSlide>
-              <Card key={news?.name[i]} variant="outlined" sx={{ maxWidth: 300, minHeight: 300 }}>
+            <SwiperSlide key={i}>
+              <Card variant="outlined" sx={{ maxWidth: 300, minHeight: 300 }}>
                 <CardContent>
                   <Stack spacing={1}>
                     <Typography variant="subtitle2">
-                      {shortText(news?.name, 50)}
+                      {shortText(newsItem?.title, 50)}
                     </Typography>
                     <Typography variant="caption">
-                      {news?.provider?.[0]?.name}
+                      {newsItem?.source?.name}
                     </Typography>
                     <Typography variant="caption">
-                      <Moment format="LL" date={dateToFormat} />
+                      <Moment format="LLL" date={dateToFormat} />
                     </Typography>
                     <Divider light />
-                    <Typography variant ='body'> {shortText(news?.description, 100)}</Typography>
+                    <Typography variant="body2">
+                      {shortText(newsItem?.description, 100)}
+                    </Typography>
                   </Stack>
                 </CardContent>
                 <CardActions>
-                  <Link href={news?.url} target="_blank" underline="none">
+                  <Link href={newsItem?.url} target="_blank" underline="none">
                     <Button size="small">Learn More</Button>
                   </Link>
                 </CardActions>

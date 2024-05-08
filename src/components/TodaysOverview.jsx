@@ -20,14 +20,14 @@ const TodaysOverview = ({ current, forecast }) => {
     {
       item: "High",
       value: fahrenheit
-        ? `${forecast?.[0]?.day.maxtemp_f}°F`
-        : `${forecast?.[0]?.day.maxtemp_c}°C`,
+        ? `${forecast?.[0].day.maxtemp_c}°C`
+        : `${forecast?.[0].day.maxtemp_f}°F`,
     },
     {
       item: "Low",
       value: fahrenheit
-        ? `${forecast?.[0]?.day.mintemp_f}°F`
-        : `${forecast?.[0]?.day.mintemp_c}°C`,
+        ? `${forecast?.[0].day.mintemp_c}°C`
+        : `${forecast?.[0].day.mintemp_f}°F`,
     },
     { item: "Wind", value: `${current?.wind_mph}mph` },
     { item: "Rain", value: `${forecast?.[0]?.day?.daily_chance_of_rain}%` },
@@ -38,7 +38,8 @@ const TodaysOverview = ({ current, forecast }) => {
   return (
     <Box sx={{ marginTop: "2rem" }}>
       <Typography sx={{ marginBottom: "1rem" }} color="primary" variant="h6">
-        Todays Overview
+        {" "}
+        Todays Overview{" "}
       </Typography>
       <Swiper
         spaceBetween={15}
@@ -49,7 +50,7 @@ const TodaysOverview = ({ current, forecast }) => {
             slidesPerView: 12,
           },
           1280: {
-            slidesPerView: 8,
+            slidesPerView: 9,
           },
           1020: {
             slidesPerView: 7,
@@ -58,7 +59,7 @@ const TodaysOverview = ({ current, forecast }) => {
             slidesPerView: 5,
           },
           480: {
-            slidesPerView: 6,
+            sliderPerView: 6,
           },
           320: {
             slidesPerView: 4,
@@ -68,10 +69,10 @@ const TodaysOverview = ({ current, forecast }) => {
           },
         }}
       >
-        {hours48Length?.slice(currentHour).map((hour) => {
+        {hours48Length?.slice(currentHour).map((hour, i) => {
           const dateToFormatHour = hour.time;
           return (
-            <SwiperSlide>
+            <SwiperSlide key={i}>
               <Box key={hour.time}>
                 <Paper
                   sx={{
@@ -81,15 +82,17 @@ const TodaysOverview = ({ current, forecast }) => {
                 >
                   <Stack justifyContent="center" alignItems="center">
                     <Typography variant="subtitle2" color="secondary">
-                      <Moment format="hhA" date={dateToFormatHour} />
+                      {" "}
+                      <Moment format="hhA" date={dateToFormatHour} />{" "}
                     </Typography>
                     <img src={hour.condition.icon} alt="weather icon" />
                     <Typography color="secondary">
                       {" "}
-                      {fahrenheit ? `${hour.temp_c}°C` : `${hour.temp_f}℉`}
+                      {fahrenheit ? `${hour.temp_c}°C` : `${hour.temp_f}°F`}
                     </Typography>
                     <Typography color="secondary">
-                      {hour.chance_of_rain}%
+                      {" "}
+                      {hour.chance_of_rain}%{" "}
                     </Typography>
                   </Stack>
                 </Paper>
@@ -118,9 +121,10 @@ const TodaysOverview = ({ current, forecast }) => {
             >
               <Stack>
                 <Typography color="secondary.dark" variant="subtitle2">
-                  {item}
+                  {" "}
+                  {item}{" "}
                 </Typography>
-                <Typography variant="subtitle2">{value}</Typography>
+                <Typography variant="subtitle2"> {value} </Typography>
               </Stack>
             </Paper>
           </Grid>

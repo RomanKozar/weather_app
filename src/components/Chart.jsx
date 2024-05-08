@@ -21,33 +21,36 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import zoomPlugin from "chartjs-plugin-zoom";
 
 ChartJS.register(
+  ChartDataLabels,
+  zoomPlugin,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
-  Tooltip,
-  Legend,
-  LineController,
-  BarController,
   BarElement,
-  zoomPlugin
+  Legend,
+  Tooltip,
+  LineController,
+  BarController
 );
 
 const WeatherChart = ({ forecast }) => {
   const [hourly, setHourly] = useState(true);
 
+  // Hourly
   const hourlyTemps = [];
   const hourlyTimes = [];
   const hourlyIcons = [];
 
-  const daysTemps = [];
-  const daysDates = [];
-  const daysIcons = [];
+  // Days
+  const dayTemps = [];
+  const dayDates = [];
+  const dayIcons = [];
 
   const fahrenheit = useSelector((state) => state.weatherState.fahrenheit);
 
   const dayOneHours = forecast?.[0].hour;
-  const dayTwoHours = forecast?.[0].hour;
+  const dayTwoHours = forecast?.[1].hour;
   const hours48Length = dayOneHours?.concat(dayTwoHours);
 
   const date = new Date();
@@ -59,25 +62,24 @@ const WeatherChart = ({ forecast }) => {
       hour: "numeric",
       hour12: true,
     });
-    hourlyTemps.push(fahrenheit ? hour?.temp_c : hour?.temp_f);
     hourlyTimes.push(convertedTime);
+    hourlyTemps.push(fahrenheit ? hour?.temp_c : hour?.temp_f);
     hourlyIcons.push(hour.condition.icon);
   });
 
   forecast?.forEach((days) => {
     const day = new Date(days.date);
     const convertedDay = day.toLocaleDateString();
-    //converted
-    daysTemps.push(fahrenheit ? days?.day.maxtemp_c : days?.day.maxtemp_f);
-    daysDates.push(convertedDay);
-    daysIcons.push(days.day.condition.icon);
+    dayDates.push(convertedDay);
+    dayTemps.push(fahrenheit ? days.day.maxtemp_c : days?.day.maxtemp_f);
+    dayIcons.push(days.day.condition.icon);
   });
 
   const tempData = {
-    labels: hourly ? hourlyTimes : daysDates,
+    labels: hourly ? hourlyTimes : dayDates,
     datasets: [
       {
-        data: hourly ? hourlyTemps : daysTemps,
+        data: hourly ? hourlyTemps : dayTemps,
         backgroundColor: Colors.blue,
         borderColor: Colors.blue,
       },
@@ -86,6 +88,7 @@ const WeatherChart = ({ forecast }) => {
 
   const options = {
     responsive: true,
+
     scales: {
       yAxis: {
         display: false,
@@ -137,16 +140,18 @@ const WeatherChart = ({ forecast }) => {
   return (
     <ContentContainer>
       <Stack direction="row" spacing={2}>
-        <Typography variant="h6">{`Forecast ${
-          fahrenheit ? "°C" : "°F"
-        }`}</Typography>
+        <Typography variant="h6">
+          {" "}
+          {`Forecast ${fahrenheit ? "°C" : "°F"}`}{" "}
+        </Typography>
         <Button
           onClick={() => {
             hourly ? setHourly(false) : setHourly(true);
           }}
           variant="text"
         >
-          {hourly ? "Show Daily" : "Show Hourly"}
+          {" "}
+          {hourly ? "Show Daily" : "Show Hourly"}{" "}
         </Button>
       </Stack>
       <Chart type="bar" options={options} data={tempData} />

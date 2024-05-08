@@ -1,5 +1,5 @@
-import React from "react";
-import { PropTypes } from "prop-types";
+import * as React from "react";
+import PropTypes from "prop-types";
 import { MemoryRouter, Link, matchPath, useLocation } from "react-router-dom";
 import { StaticRouter } from "react-router-dom/server";
 import {
@@ -96,7 +96,11 @@ function TopNav(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: { sm: "none" } }}>
+    <Box
+      sx={{
+        display: { sm: "none" },
+      }}
+    >
       <AppBar component="nav">
         <Toolbar>
           <IconButton
@@ -113,7 +117,7 @@ function TopNav(props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Cloudie
+            MUI
           </Typography>
         </Toolbar>
       </AppBar>
@@ -124,7 +128,7 @@ function TopNav(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true,
+            keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
             display: { xs: "block", sm: "none" },
@@ -134,8 +138,7 @@ function TopNav(props) {
             },
           }}
         >
-
-            {drawer}
+          {drawer}
         </Drawer>
       </Box>
       <Toolbar />

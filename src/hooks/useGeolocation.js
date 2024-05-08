@@ -10,17 +10,13 @@ const useGeoLocation = () => {
     setGeoLocation({
       loaded: true,
       // coordinates: {
-      //   lat: 48.6324, //Оленьово
-      //   lng: 22.579,
+      //   lat: 48.6198, // Широта Ужгорода
+      //   lng: 22.2879, // Довгота Ужгорода
       // },
       coordinates: {
-        lat: 48.6208, //Ужгород
-        lng: 22.2879,
+        lat: location.coords.latitude,
+        lng: location.coords.longitude,
       },
-      // coordinates: {
-      //   lat: location.coords.latitude, //За геолокацією
-      //   lng: location.coords.longitude,
-      // },
     });
   };
 
