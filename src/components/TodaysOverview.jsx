@@ -32,7 +32,7 @@ const TodaysOverview = ({ current, forecast }) => {
     { item: "Wind", value: `${current?.wind_mph}mph` },
     { item: "Rain", value: `${forecast?.[0]?.day?.daily_chance_of_rain}%` },
     { item: "Pressure", value: `${current?.pressure_in}in` },
-    { item: "Humidity", value: current?.uv },
+    { item: "Humidity", value: `${current?.uv}` },
   ];
 
   return (

@@ -7,7 +7,7 @@ const ThreeDayForecast = ({ forecast }) => {
   const fahrenheit = useSelector((state) => state.weatherState.fahrenheit);
 
   return (
-    <Grid sx={{ paddingTop: 2 }} container columns={{ xs: 1, sm: 2, md: 12 }}>
+    <Grid sx={{ paddingTop: 1 }} container columns={{ xs: 1, sm: 2, md: 12 }}>
       {forecast?.map((days, i) => (
         <Grid item xs={1} sm={4} md={4} key={i}>
           <Paper elevation={2} sx={{ padding: 1, height: "100%" }}>
