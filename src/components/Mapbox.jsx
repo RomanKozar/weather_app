@@ -80,13 +80,11 @@ const Mapbox = ({ location, current }) => {
   };
 
   useEffect(() => {
-    // save to local storage
     localStorage.setItem("savedItems", JSON.stringify(saves));
     if (savedItems) {
       for (let i = 0; i < savedItems.length; i++) {
         if (savedItems[i].name === location.name) {
           dispatch(setItemSaved(true));
-          // break to stop statement from throwing false
           break;
         } else if (savedItems[i].id !== location.name) {
           dispatch(setItemSaved(false));
